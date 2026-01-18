@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Персональна сторінка | Розробник ANN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0f172a;
+            --secondary: #3b82f6;
+            --accent: #10b981;
+            --text-main: #1e293b;
+            --text-light: #64748b;
+            --bg-body: #f1f5f9;
+        }
+
+        * { box-sizing: border-box; scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; margin: 0; background-color: var(--bg-body); color: var(--text-main); }
+
+        /* HEADER */
+        header {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 15px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .logo { font-weight: 700; font-size: 1.4rem; color: var(--primary); text-decoration: none; }
+        nav a { text-decoration: none; color: var(--text-light); margin-left: 30px; font-weight: 500; transition: 0.3s; }
+        nav a:hover { color: var(--secondary); }
+        .nav-btn { background: var(--secondary); color: white; padding: 10px 20px; border-radius: 8px; }
+        .nav-btn:hover { background: #2563eb; color: white; }
+
+        /* HERO SECTION */
+        .hero { padding: 150px 20px 80px; text-align: center; max-width: 1000px; margin: 0 auto; }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 20px; color: var(--primary); letter-spacing: -1.5px; }
+        .hero p { font-size: 1.2rem; color: var(--text-light); max-width: 600px; margin: 0 auto 30px; }
+
+        /* ABOUT ME SECTION */
+        .about-container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 40px;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+        }
+        .profile-img {
+            width: 300px;
+            height: 300px;
+            border-radius: 20px;
+            background: #e2e8f0; /* Заглушка для фото */
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        .about-text h2 { margin-top: 0; font-size: 2rem; color: var(--primary); }
+        .about-text p { font-size: 1.1rem; line-height: 1.7; color: var(--text-light); }
+        
+        .skills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+        .skill-tag { background: #f1f5f9; padding: 6px 14px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; color: var(--primary); }
+
+        /* PROJECT HIGHLIGHT */
+        .project-preview {
+            max-width: 1000px;
+            margin: 60px auto;
+            padding: 40px;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+            border-radius: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+        .project-preview h2 { color: #fff; font-size: 2rem; }
+        .project-preview p { color: #cbd5e1; max-width: 700px; }
+        .project-preview .btn-doc {
+            display: inline-block;
+            margin-top: 20px;
+            background: var(--accent);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        footer { text-align: center; padding: 40px; color: var(--text-light); border-top: 1px solid #e2e8f0; }
+
+        @media (max-width: 768px) {
+            .about-container { flex-direction: column; text-align: center; }
+            .hero h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="#" class="logo">DevPortfolio</a>
+    <nav>
+        <a href="#about">Про мене</a>
+        <a href="#projects">Проєкти</a>
+        <a href="documentation.html" class="nav-btn">Документація</a>
+    </nav>
+</header>
+
+<main>
+    <section class="hero">
+        <h1>Створення майбутнього через дані та нейромережі</h1>
+        <p>Привіт! Я спеціалізуюся на розробці інтелектуальних систем та низькорівневій оптимізації алгоритмів.</p>
+    </section>
+
+    <section id="about" class="about-container">
+        <img src="https://via.placeholder.com/300" alt="Профільне фото" class="profile-img">
+        <div class="about-text">
+            <h2>Про мене</h2>
+            <p>Я розробник, який фокусується на перетині високорівневого машинного навчання та продуктивних рішень на С. Мій підхід базується на створенні систем, які не тільки точні, але й ефективні в реальних умовах.</p>
+            
+            <div class="skills">
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">C99 / C++</span>
+                <span class="skill-tag">PyTorch</span>
+                <span class="skill-tag">Embedded Systems</span>
+                <span class="skill-tag">ANN Architecture</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="project-preview">
+        <h2>Energy Forecast Project</h2>
+        <p>Комплексна система короткострокового прогнозування добового електроспоживання. Проєкт реалізує повний цикл від аналізу великих масивів даних до впровадження на рівні C99.</p>
+        
+        <div style="margin: 20px 0;">
+            <span style="opacity: 0.7;">Технології:</span> 
+            <code style="background: rgba(255,255,255,0.1); padding: 4px 8px; border-radius: 4px; margin-left: 10px;">Python</code>
+            <code style="background: rgba(255,255,255,0.1); padding: 4px 8px; border-radius: 4px;">PyTorch</code>
+            <code style="background: rgba(255,255,255,0.1); padding: 4px 8px; border-radius: 4px;">FANN</code>
+        </div>
+
+        <a href="documentation.html" class="btn-doc">Переглянути повну документацію →</a>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2026 Всі права захищені. Створено з пристрастю до технологій.</p>
+</footer>
+
+</body>
+</html>

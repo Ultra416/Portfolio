@@ -3,152 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Документація: Прогнозування енергоспоживання (ANN)</title>
+    <title>Прогнозування енергоспоживання — ANN Project</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #2c3e50;
-            --secondary: #e67e22;
-            --accent: #3498db;
-            --bg: #f8f9fa;
-            --text: #333;
+            --primary: #0f172a;
+            --secondary: #3b82f6;
+            --accent: #f59e0b;
+            --text-main: #1e293b;
+            --text-light: #64748b;
+            --bg-light: #f8fafc;
         }
+        * { box-sizing: border-box; }
         body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
             line-height: 1.6;
-            color: var(--text);
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 2rem;
-            background-color: var(--bg);
+            color: var(--text-main);
+            background-color: var(--bg-light);
         }
-        .card {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-        }
-        header {
-            border-bottom: 4px solid var(--secondary);
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-        }
-        h1 { color: var(--primary); margin: 0; font-size: 2.2rem; }
-        h2 { color: var(--primary); border-left: 5px solid var(--secondary); padding-left: 15px; margin-top: 2.5rem; }
-        h3 { color: var(--accent); margin-top: 1.5rem; }
-        
-        table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; background: #fff; }
-        th, td { border: 1px solid #dee2e6; padding: 12px; text-align: left; }
-        th { background-color: #f1f3f5; font-weight: 600; }
-        
-        .formula {
-            background: #2c3e50;
-            color: #ecf0f1;
-            padding: 1.5rem;
-            border-radius: 8px;
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #1e293b 100%);
+            color: white;
+            padding: 100px 20px;
             text-align: center;
-            font-family: 'Courier New', monospace;
-            font-weight: bold;
-            margin: 1.5rem 0;
         }
-        .highlight { background: #e8f4fd; padding: 1rem; border-radius: 6px; border-left: 4px solid var(--accent); }
-        code { background: #eee; padding: 2px 5px; border-radius: 4px; font-family: monospace; }
-        ul { padding-left: 1.2rem; }
-        li { margin-bottom: 0.8rem; }
+        .hero h1 { font-size: 3rem; margin-bottom: 20px; letter-spacing: -1px; }
+        .hero p { font-size: 1.25rem; max-width: 800px; margin: 0 auto 30px; color: #cbd5e1; }
+        
+        .container { max-width: 1100px; margin: -50px auto 50px; padding: 0 20px; }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        .feature-card:hover { transform: translateY(-5px); }
+        .feature-card h3 { color: var(--secondary); margin-top: 0; }
+        
+        .section { background: white; padding: 50px; border-radius: 20px; margin-bottom: 40px; box-shadow: 0 4px 6px rgba(0,0,0,0.03); }
+        .section h2 { border-left: 5px solid var(--secondary); padding-left: 20px; margin-bottom: 30px; }
+
+        .tech-stack { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px; }
+        .tech-tag {
+            background: #eff6ff;
+            color: #1d4ed8;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .stats { display: flex; justify-content: space-around; text-align: center; margin: 40px 0; }
+        .stat-item b { font-size: 2.5rem; color: var(--primary); display: block; }
+        .stat-item span { color: var(--text-light); }
+
+        .btn {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: opacity 0.3s;
+        }
+        .btn:hover { opacity: 0.9; }
+        
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .stats { flex-direction: column; gap: 20px; }
+        }
     </style>
 </head>
 <body>
 
-<div class="card">
-    <header>
-        <h1>Інтелектуальна система прогнозування енергоспоживання</h1>
-        <p>Технічна документація проєкту (Python / PyTorch / C99)</p>
-    </header>
+<header class="hero">
+    <h1>Прогнозування енергоспоживання</h1>
+    <p>Інтелектуальна система на базі штучних нейронних мереж для точного планування енергоресурсів та оптимізації витрат.</p>
+    <a href="#details" class="btn">Докладно про проєкт</a>
+</header>
 
-    <section>
-        <h2>Анотація</h2>
-        <p>Система призначена для короткострокового прогнозування добового електроспоживання (24 години) на основі історичних даних за останні 30 днів та прогнозних показників погоди. Реалізовано повний цикл: від обробки CSV-даних до експорту бінарних моделей для вбудованих систем.</p>
-    </section>
+<div class="container" id="details">
+    <div class="features">
+        <div class="feature-card">
+            <h3>Навчальна еволюція</h3>
+            <p>Поступовий перехід від прототипування в Python/PyTorch до промислової реалізації на C99/FANN[cite: 624, 660].</p>
+        </div>
+        <div class="feature-card">
+            <h3>Метео-залежність</h3>
+            <p>Врахування прогнозу погоди на наступну добу забезпечує високу точність при температурних коливаннях[cite: 628, 684].</p>
+        </div>
+        <div class="feature-card">
+            <h3>Вбудовані системи</h3>
+            <p>Повна сумісність форматів даних для роботи на мікрокомп'ютерах з обмеженими ресурсами[cite: 666].</p>
+        </div>
+    </div>
 
-    <section>
-        <h2>1. Загальна логіка системи</h2>
-        <p>Модель використовує комбінований підхід:</p>
-        <ul>
-            <li><strong>Вхідна історія:</strong> Споживання та погода за попередні 30 днів.</li>
-            <li><strong>Прогнозний фактор:</strong> Очікувана погода на день прогнозу (31-й день).</li>
-            <li><strong>Результат:</strong> 24 значення навантаження (МВт·год).</li>
-        </ul>
-        <div class="formula">
-            30 днів × (7 погодних ознак + 24 год споживання) + 7 ознак погоди (завтра) = 937 входів
+    <section class="section">
+        <h2>Мета та актуальність</h2>
+        <p>Проєкт спрямований на вирішення проблеми точного планування енергоресурсів для уникнення перевантажень мережі. Система здатна «розуміти» складні залежності між зовнішніми чинниками, такими як температура, хмарність, опади, та обсягами споживання[cite: 664].</p>
+        
+        <div class="stats">
+            <div class="stat-item"><b>937</b><span>Параметрів входу</span></div>
+            <div class="stat-item"><b>30 днів</b><span>Глибина історії</span></div>
+            <div class="stat-item"><b>24 год</b><span>Горизонт прогнозу</span></div>
         </div>
     </section>
 
-    <section>
-        <h2>2. Архітектура та Технології</h2>
-        <p><strong>Нейромережа (EnergyANN):</strong></p>
+    
+
+    <section class="section">
+        <h2>Архітектурне рішення</h2>
+        <p>В основі системи лежить повнозв'язна нейронна мережа <b>EnergyANN</b>[cite: 635, 671].</p>
         <ul>
-            <li><strong>Вхідний шар:</strong> 937 нейронів.</li>
-            <li><strong>Приховані шари:</strong> 512 та 256 нейронів з активацією ReLU.</li>
-            <li><strong>Вихідний шар:</strong> 24 нейрони.</li>
+            <li><b>Вхідний шар:</b> 937 нейронів, що включають історію за 30 днів та метеопрогноз[cite: 631, 637].</li>
+            <li><b>Приховані шари:</b> Дворівнева структура (512 та 256 нейронів) з активацією ReLU для виявлення нелінійних патернів[cite: 638].</li>
+            <li><b>Вихідний шар:</b> 24 нейрони, що формують добовий профіль навантаження[cite: 639].</li>
         </ul>
-        <p><strong>Технологічний стек:</strong> Python (Pandas, PyTorch, Scikit-learn), C99 (FANN).</p>
-    </section>
-
-    <section>
-        <h2>3. Дорожня карта (Модулі)</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Етап</th>
-                    <th>Модуль</th>
-                    <th>Призначення</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td><code>01_prepare_csv.py</code></td>
-                    <td>Об’єднання погоди та споживання в єдину базу.</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td><code>02_normalize_data.py</code></td>
-                    <td>Нормалізація даних у діапазон [0, 1] та створення .bin файлів.</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td><code>03_train_ann.py</code></td>
-                    <td>Навчання моделі (2000+ епох) та збереження .pth файлу.</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td><code>05_prepare_input.py</code></td>
-                    <td>Формування вхідного вектора для реального прогнозу.</td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td><code>06_predict.py</code></td>
-                    <td>Генерація прогнозу, денормалізація та візуалізація.</td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
-
-    <section>
-        <h2>4. Результати дослідів</h2>
-        <div class="highlight">
-            <p><strong>Transfer Learning:</strong> Реалізовано перенесення ваг з моделі на 930 входів до моделі на 937 входів. Це дозволило врахувати погоду на день прогнозу без повної перепідготовки мережі, забезпечивши високу точність при температурних коливаннях.</p>
+        
+        <h3>Технологічний стек</h3>
+        <div class="tech-stack">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">PyTorch</span>
+            <span class="tech-tag">Pandas</span>
+            <span class="tech-tag">Scikit-learn</span>
+            <span class="tech-tag">C99</span>
+            <span class="tech-tag">FANN</span>
         </div>
-        <p>Експерименти підтвердили, що нормалізація через <code>MinMaxScaler</code> критично важлива для збіжності функції втрат <code>MSELoss</code>.</p>
     </section>
 
-    <section>
-        <h2>5. Сумісність із C99</h2>
-        <p>Для інтеграції в низькорівневе середовище дані зберігаються у форматі <code>.bin</code>:</p>
-        <ul>
-            <li><strong>Заголовок:</strong> Кількість рядків та колонок (<code>int32</code>).</li>
-            <li><strong>Дані:</strong> Послідовність значень (<code>float32</code>).</li>
-        </ul>
+    <section class="section">
+        <h2>Досліди та результати</h2>
+        <p>Експериментально підтверджено, що модель із прогнозом погоди демонструє кращу адаптацію до аномальних змін температури порівняно з базовими сценаріями[cite: 684].</p>
+        <div class="highlight" style="background: #fffbeb; padding: 20px; border-radius: 10px; border-left: 4px solid var(--accent);">
+            <b>Transfer Learning:</b> Використано механізм перенесення ваг для розширення архітектури моделі, що дозволило зберегти накопичені знання при додаванні нових вхідних ознак[cite: 689, 692].
+        </div>
     </section>
+
+    <footer style="text-align: center; color: var(--text-light); padding-bottom: 20px;">
+        <p>&copy; 2026 Проєкт прогнозування енергоспоживання. Всі права захищені.</p>
+    </footer>
 </div>
 
 </body>

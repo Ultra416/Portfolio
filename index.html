@@ -3,174 +3,151 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Документація проєкту: Прогнозування енергоспоживання (ANN)</title>
+    <title>Документація: Прогнозування енергоспоживання (ANN)</title>
     <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #e67e22;
+            --accent: #3498db;
+            --bg: #f8f9fa;
+            --text: #333;
+        }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             line-height: 1.6;
-            color: #333;
-            max-width: 1000px;
+            color: var(--text);
+            max-width: 900px;
             margin: 0 auto;
-            padding: 20px;
-            background-color: #f4f7f6;
+            padding: 2rem;
+            background-color: var(--bg);
+        }
+        .card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
         header {
-            background-color: #2c3e50;
-            color: white;
-            padding: 30px;
-            text-align: center;
-            border-radius: 8px;
-            margin-bottom: 30px;
+            border-bottom: 4px solid var(--secondary);
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
         }
-        h1 { margin: 0; font-size: 2em; }
-        h2 { color: #2c3e50; border-bottom: 2px solid #2c3e50; padding-bottom: 5px; margin-top: 40px; }
-        h3 { color: #e67e22; margin-top: 25px; }
-        .container { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
-        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
-        th { background-color: #f2f2f2; color: #2c3e50; }
-        .citation { color: #7f8c8d; font-size: 0.85em; font-style: italic; }
-        .formula { background: #f9f9f9; padding: 15px; border-left: 5px solid #e67e22; font-family: 'Courier New', monospace; margin: 20px 0; }
-        .note { background: #e8f4fd; padding: 15px; border-radius: 4px; border-left: 5px solid #3498db; }
-        ul { padding-left: 20px; }
-        li { margin-bottom: 10px; }
+        h1 { color: var(--primary); margin: 0; font-size: 2.2rem; }
+        h2 { color: var(--primary); border-left: 5px solid var(--secondary); padding-left: 15px; margin-top: 2.5rem; }
+        h3 { color: var(--accent); margin-top: 1.5rem; }
+        
+        table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; background: #fff; }
+        th, td { border: 1px solid #dee2e6; padding: 12px; text-align: left; }
+        th { background-color: #f1f3f5; font-weight: 600; }
+        
+        .formula {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            margin: 1.5rem 0;
+        }
+        .highlight { background: #e8f4fd; padding: 1rem; border-radius: 6px; border-left: 4px solid var(--accent); }
+        code { background: #eee; padding: 2px 5px; border-radius: 4px; font-family: monospace; }
+        ul { padding-left: 1.2rem; }
+        li { margin-bottom: 0.8rem; }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>Прогнозування енергоспоживання (ANN)</h1>
-    <p>Документація проєкту: Інтелектуальна система</p>
-</header>
+<div class="card">
+    <header>
+        <h1>Інтелектуальна система прогнозування енергоспоживання</h1>
+        <p>Технічна документація проєкту (Python / PyTorch / C99)</p>
+    </header>
 
-<div class="container">
     <section>
         <h2>Анотація</h2>
-        [cite_start]<p>У даному проєкті розроблено комплексну систему для короткострокового прогнозування добового електроспоживання (24 години) на основі історичних даних за останні 30 днів та прогнозних показників погоди[cite: 659]. [cite_start]Проєкт реалізує «навчальну еволюцію»: від обробки даних та прототипування архітектури в середовищі Python/PyTorch до підготовки бінарних даних для промислового впровадження на низькорівневій мові C99[cite: 660]. [cite_start]Основна увага приділяється точності прогнозів завдяки врахуванню метеорологічних факторів та сумісності форматів даних між різними програмними платформами[cite: 661].</p>
+        <p>Система призначена для короткострокового прогнозування добового електроспоживання (24 години) на основі історичних даних за останні 30 днів та прогнозних показників погоди. Реалізовано повний цикл: від обробки CSV-даних до експорту бінарних моделей для вбудованих систем.</p>
     </section>
 
     <section>
-        <h2>Вступ</h2>
-        [cite_start]<p>Актуальність проєкту зумовлена необхідністю точного планування енергоресурсів, що дозволяє оптимізувати витрати та уникати перевантажень мережі[cite: 663]. [cite_start]Метою роботи є створення гнучкої моделі нейронної мережі, яка здатна «розуміти» залежність між зовнішніми чинниками (температура, опади, хмарність) та обсягами споживання[cite: 664]. [cite_start]Використання Python на початковому етапі дозволяє швидко експериментувати з архітектурою та візуалізувати результати[cite: 665]. [cite_start]Подальший перехід на C99 забезпечує можливість інтеграції розроблених алгоритмів у вбудовані системи та мікрокомп'ютери з обмеженими ресурсами[cite: 666].</p>
-    </section>
-
-    <section>
-        <h2>1. Огляд технологій та бібліотек</h2>
-        [cite_start]<p>Для реалізації проєкту було обрано наступний технологічний стек[cite: 668]:</p>
+        <h2>1. Загальна логіка системи</h2>
+        <p>Модель використовує комбінований підхід:</p>
         <ul>
-            [cite_start]<li><strong>Python</strong>: Основна мова для аналізу даних та навчання моделей завдяки високій швидкості розробки[cite: 669].</li>
-            [cite_start]<li><strong>Pandas</strong>: Використовується для маніпуляцій із CSV-файлами, агрегації споживання та об’єднання таблиць[cite: 670].</li>
-            [cite_start]<li><strong>PyTorch</strong>: Фреймворк глибокого навчання, на якому побудовано архітектуру EnergyANN[cite: 671].</li>
-            [cite_start]<li><strong>Scikit-learn (MinMaxScaler)</strong>: Застосовується для нормалізації вхідних даних у діапазон [0, 1][cite: 672].</li>
-            [cite_start]<li><strong>Joblib</strong>: Для збереження стану масштабатора (scaler.pkl), що необхідно для денормалізації[cite: 673].</li>
-            [cite_start]<li><strong>Struct & Numpy</strong>: Для експорту даних у бінарний формат (float32), сумісний із мовою С[cite: 674].</li>
-            [cite_start]<li><strong>FANN</strong>: Цільова бібліотека на стороні C99 для високоефективного виконання прогнозів[cite: 675].</li>
+            <li><strong>Вхідна історія:</strong> Споживання та погода за попередні 30 днів.</li>
+            <li><strong>Прогнозний фактор:</strong> Очікувана погода на день прогнозу (31-й день).</li>
+            <li><strong>Результат:</strong> 24 значення навантаження (МВт·год).</li>
         </ul>
-    </section>
-
-    <section>
-        <h2>2. Загальна логіка системи</h2>
-        [cite_start]<p>Модель використовує комбінований підхід для прогнозування[cite: 626]:</p>
-        <ul>
-            [cite_start]<li><strong>Історія</strong>: Дані про споживання та погоду за попередні 30 днів[cite: 627].</li>
-            [cite_start]<li><strong>Майбутній фактор</strong>: Прогноз погоди на 31-й день[cite: 628].</li>
-            [cite_start]<li><strong>Вихід</strong>: 24 значення погодинного споживання на наступну добу[cite: 629].</li>
-        </ul>
-        <h3>Структура вхідного вектора</h3>
         <div class="formula">
-            [cite_start]$$30 \text{ днів} \times (7 \text{ погодних ознак} + 24 \text{ години споживання}) + 7 \text{ прогнозних ознак погоди} = 937$$ [cite: 631]
+            30 днів × (7 погодних ознак + 24 год споживання) + 7 ознак погоди (завтра) = 937 входів
         </div>
-
-        <h3>Архітектура нейромережі (EnergyANN)</h3>
-        
-        [cite_start]<p>Використовується повнозв'язна нейронна мережа (MLP) з наступною структурою[cite: 636]:</p>
-        <ul>
-            [cite_start]<li><strong>Вхідний шар</strong>: 937 нейронів (з урахуванням погоди на день прогнозу)[cite: 637].</li>
-            [cite_start]<li><strong>Приховані шари</strong>: Два лінійних шари (512 та 256 нейронів) з активацією ReLU[cite: 638].</li>
-            [cite_start]<li><strong>Вихідний шар</strong>: 24 нейрони (прогноз на кожну годину доби)[cite: 639].</li>
-        </ul>
     </section>
 
     <section>
-        <h2>3. Етапи реалізації (Дорожня карта)</h2>
+        <h2>2. Архітектура та Технології</h2>
+        <p><strong>Нейромережа (EnergyANN):</strong></p>
+        <ul>
+            <li><strong>Вхідний шар:</strong> 937 нейронів.</li>
+            <li><strong>Приховані шари:</strong> 512 та 256 нейронів з активацією ReLU.</li>
+            <li><strong>Вихідний шар:</strong> 24 нейрони.</li>
+        </ul>
+        <p><strong>Технологічний стек:</strong> Python (Pandas, PyTorch, Scikit-learn), C99 (FANN).</p>
+    </section>
+
+    <section>
+        <h2>3. Дорожня карта (Модулі)</h2>
         <table>
             <thead>
                 <tr>
-                    <th>№</th>
-                    <th>Модуль (скрипт)</th>
+                    <th>Етап</th>
+                    <th>Модуль</th>
                     <th>Призначення</th>
-                    <th>Основні входи/виходи</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>1</td>
-                    <td>01_prepare_csv.py</td>
-                    [cite_start]<td>Зведення сирих даних погоди та споживання в один файл[cite: 633].</td>
-                    <td>weather.csv, consumption.csv >>> energy_data.csv</td>
+                    <td><code>01_prepare_csv.py</code></td>
+                    <td>Об’єднання погоди та споживання в єдину базу.</td>
                 </tr>
                 <tr>
                     <td>2</td>
-                    <td>02_normalize_data.py</td>
-                    [cite_start]<td>Масштабування даних у діапазон [0, 1][cite: 633].</td>
-                    <td>energy_data.csv >>> energy_data_norm.csv, scaler.pkl, bin</td>
+                    <td><code>02_normalize_data.py</code></td>
+                    <td>Нормалізація даних у діапазон [0, 1] та створення .bin файлів.</td>
                 </tr>
                 <tr>
                     <td>3</td>
-                    <td>03_train_ann.py</td>
-                    [cite_start]<td>Створення та навчання PyTorch-моделі[cite: 633].</td>
-                    <td>energy_data_norm.csv >>> energy_ann.pth</td>
+                    <td><code>03_train_ann.py</code></td>
+                    <td>Навчання моделі (2000+ епох) та збереження .pth файлу.</td>
                 </tr>
                 <tr>
                     <td>4</td>
-                    <td>05_prepare_forecast_input.py</td>
-                    [cite_start]<td>Підготовка даних для реального прогнозу «на завтра»[cite: 633].</td>
-                    <td>energy_data_norm.csv >>> forecast_input.bin</td>
+                    <td><code>05_prepare_input.py</code></td>
+                    <td>Формування вхідного вектора для реального прогнозу.</td>
                 </tr>
                 <tr>
                     <td>5</td>
-                    <td>06_predict_tomorrow.py</td>
-                    [cite_start]<td>Отримання прогнозу та його візуалізація[cite: 633].</td>
-                    <td>energy_ann.pth, forecast_input.bin >>> forecast_output.csv</td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td>08_export_to_binary.py</td>
-                    [cite_start]<td>Експорт вибірок для навчання в C99/FANN[cite: 633].</td>
-                    <td>energy_data_norm.csv >>> train_input.bin, train_output.bin</td>
+                    <td><code>06_predict.py</code></td>
+                    <td>Генерація прогнозу, денормалізація та візуалізація.</td>
                 </tr>
             </tbody>
         </table>
     </section>
 
     <section>
-        <h2>4. Досліди та експерименти</h2>
-        <h3>4.1. Порівняння сценаріїв входу</h3>
-        [cite_start]<p>Було досліджено два підходи [cite: 681][cite_start]: базовий (тільки історія) та реалістичний (історія + прогноз погоди)[cite: 682, 683]. [cite_start]Результат показав, що модель із прогнозом погоди (937 входів) краще адаптується до аномальних змін температури[cite: 684].</p>
-        
-        <h3>4.2. Нормалізація та її вплив</h3>
-        [cite_start]<p>Експериментально підтверджено, що приведення даних до діапазону [0, 1] запобігає домінуванню великих значень (наприклад, номер дня року) над малими (вологість)[cite: 686]. [cite_start]Це значно прискорює збіжність функції втрат MSELoss[cite: 687].</p>
-        
-        <h3>4.3. Навчання та Transfer Learning</h3>
-        [cite_start]<p>Реалізовано механізм перенесення ваг: спочатку навчалася модель на 930 входах, після чого архітектура розширювалася до 937 входів[cite: 690, 691]. [cite_start]Ваги перших шарів копіювалися, а нові зв’язки ініціалізувалися нулями для стабілізації[cite: 692].</p>
-        
-        <h3>4.4. Результати прогнозування</h3>
-        [cite_start]<p>Тестування на реальних даних показало успішне відтворення добового профілю споживання[cite: 694]. [cite_start]Графіки демонструють високу кореляцію між прогнозом (червоний пунктир) та реальністю (синя лінія)[cite: 696].</p>
+        <h2>4. Результати дослідів</h2>
+        <div class="highlight">
+            <p><strong>Transfer Learning:</strong> Реалізовано перенесення ваг з моделі на 930 входів до моделі на 937 входів. Це дозволило врахувати погоду на день прогнозу без повної перепідготовки мережі, забезпечивши високу точність при температурних коливаннях.</p>
+        </div>
+        <p>Експерименти підтвердили, що нормалізація через <code>MinMaxScaler</code> критично важлива для збіжності функції втрат <code>MSELoss</code>.</p>
     </section>
 
     <section>
-        <h2>5. Технічні особливості та використання</h2>
-        <div class="note">
-            [cite_start]<strong>Сумісність із C99:</strong> Проєкт генерує бінарні файли (.bin) із заголовком (два int32 для розмірності) та даними (float32)[cite: 647, 648].
-        </div>
-        <h3>Інструкція з використання</h3>
-        <ol>
-            [cite_start]<li><strong>Підготовка</strong>: Розмістіть weather.csv та consumption.csv у кореневій папці та запустіть скрипт 1[cite: 650].</li>
-            [cite_start]<li><strong>Обробка</strong>: Запустіть скрипт 2 для нормалізації та створення бінарного файлу[cite: 651].</li>
-            <li><strong>Навчання</strong>: Запустіть скрипт 3 (2000–2500 епох). [cite_start]Ваги збережуться в energy_ann.pth[cite: 652].</li>
-            [cite_start]<li><strong>Прогноз</strong>: Сформуйте вхідний вектор (скрипт 5) та отримайте результат (скрипт 6)[cite: 654, 655].</li>
-            [cite_start]<li><strong>Перехід до C99</strong>: Використовуйте згенеровані .bin файли як вхід для FANN[cite: 656].</li>
-        </ol>
+        <h2>5. Сумісність із C99</h2>
+        <p>Для інтеграції в низькорівневе середовище дані зберігаються у форматі <code>.bin</code>:</p>
+        <ul>
+            <li><strong>Заголовок:</strong> Кількість рядків та колонок (<code>int32</code>).</li>
+            <li><strong>Дані:</strong> Послідовність значень (<code>float32</code>).</li>
+        </ul>
     </section>
 </div>
 

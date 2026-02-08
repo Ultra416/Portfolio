@@ -6,12 +6,18 @@
     <title>DevPortfolio | Home</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #0f172a; --secondary: #3b82f6; --accent: #10b981; --bg-body: #f1f5f9; }
+        :root { --primary: #0f172a; --secondary: #3b82f6; --bg: #f1f5f9; }
         * { box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; margin: 0; background-color: var(--bg-body); color: #1e293b; }
+        body { font-family: 'Inter', sans-serif; margin: 0; background-color: var(--bg); color: #1e293b; }
         
         /* Логіка мов */
-        .lang-ua { display: none; } 
+        .lang-ua { display: none; }
+        body.ua-active .lang-ua { display: initial; }
+        body.ua-active .lang-en { display: none; }
+        
+        /* Корекція відображення блочних елементів */
+        body.ua-active h1.lang-ua, body.ua-active p.lang-ua, body.ua-active h2.lang-ua { display: block; }
+        h1.lang-en, p.lang-en, h2.lang-en { display: block; }
 
         header {
             background: white; padding: 15px 5%;
@@ -20,50 +26,29 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
         nav { display: flex; align-items: center; gap: 20px; }
-        nav a { text-decoration: none; color: #64748b; font-weight: 500; transition: 0.3s; }
-        nav a:hover { color: var(--secondary); }
-        
+        nav a { text-decoration: none; color: #64748b; font-weight: 500; }
         .nav-btn { background: var(--secondary); color: white !important; padding: 8px 16px; border-radius: 8px; }
-        .lang-switcher {
-            background: #f1f5f9; border: 1px solid #e2e8f0; padding: 6px 12px; 
-            border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.85rem;
-        }
+        .lang-switcher { background: #f1f5f9; border: 1px solid #e2e8f0; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: 600; }
 
         .hero { padding: 140px 20px 60px; text-align: center; }
-        .hero h1 { font-size: 2.8rem; letter-spacing: -1px; margin-bottom: 15px; }
+        .hero h1 { font-size: 2.8rem; letter-spacing: -1px; margin-bottom: 10px; }
+        .hero p { color: #64748b; font-size: 1.1rem; }
 
         .about-container { 
             display: flex; gap: 40px; max-width: 1000px; margin: 40px auto; 
             padding: 30px; background: white; border-radius: 20px; align-items: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
         }
         .profile-img { width: 280px; height: 280px; border-radius: 15px; object-fit: cover; flex-shrink: 0; }
-        
-        .project-preview { 
-            max-width: 1000px; margin: 40px auto; padding: 40px; 
-            background: #0f172a; color: white; border-radius: 20px; 
-        }
-
-        @media (max-width: 768px) {
-            .about-container { flex-direction: column; text-align: center; }
-            header { padding: 15px 20px; }
-            nav { gap: 10px; }
-        }
+        .project-preview { max-width: 1000px; margin: 40px auto; padding: 40px; background: #0f172a; color: white; border-radius: 20px; }
     </style>
 </head>
-<body>
+<body id="page-body">
 
 <header>
     <a href="#" class="logo" style="font-weight:700; text-decoration:none; color:var(--primary);">DevPortfolio</a>
     <nav>
-        <a href="#about">
-            <span class="lang-en">About</span>
-            <span class="lang-ua">Про мене</span>
-        </a>
-        <a href="documentation.html" class="nav-btn">
-            <span class="lang-en">Documentation</span>
-            <span class="lang-ua">Документація</span>
-        </a>
+        <a href="#about"><span class="lang-en">About</span><span class="lang-ua">Про мене</span></a>
+        <a href="documentation.html" class="nav-btn"><span class="lang-en">Documentation</span><span class="lang-ua">Документація</span></a>
         <button class="lang-switcher" onclick="toggleLanguage()">EN / UA</button>
     </nav>
 </header>
@@ -77,16 +62,16 @@
     </section>
 
     <section id="about" class="about-container">
-        <img src="items/Me_img.jpg" alt="Profile" class="profile-img">
+        <img src="items/Me_img.jpg" alt="Profile Photo" class="profile-img">
         <div class="about-text">
             <h2 class="lang-en">About Me</h2>
             <h2 class="lang-ua">Про мене</h2>
             <p class="lang-en">I am a developer focusing on the intersection of high-level Machine Learning and high-performance C solutions. My approach is based on creating systems that are not only accurate but also efficient in real-world conditions.</p>
             <p class="lang-ua">Я розробник, який фокусується на поєднанні високорівневого машинного навчання та продуктивних рішень на С. Мій підхід базується на створенні систем, які є не лише точними, а й ефективними у реальних умовах.</p>
-            <div style="margin-top:20px; display:flex; gap:10px; flex-wrap:wrap;">
-                <span style="background:#f1f5f9; padding:6px 12px; border-radius:6px; font-weight:600; font-size:0.9rem;">Python</span>
-                <span style="background:#f1f5f9; padding:6px 12px; border-radius:6px; font-weight:600; font-size:0.9rem;">PyTorch</span>
-                <span style="background:#f1f5f9; padding:6px 12px; border-radius:6px; font-weight:600; font-size:0.9rem;">C99</span>
+            <div style="margin-top:15px; display:flex; gap:10px;">
+                <span style="background:#f1f5f9; padding:5px 12px; border-radius:6px; font-weight:600;">Python</span>
+                <span style="background:#f1f5f9; padding:5px 12px; border-radius:6px; font-weight:600;">PyTorch</span>
+                <span style="background:#f1f5f9; padding:5px 12px; border-radius:6px; font-weight:600;">C99</span>
             </div>
         </div>
     </section>
@@ -96,7 +81,7 @@
         <h2 class="lang-ua">Проєкт енергопрогнозу</h2>
         <p class="lang-en">A comprehensive system for short-term forecasting of daily electricity consumption. The project implements a full cycle from data analysis to C99 implementation.</p>
         <p class="lang-ua">Комплексна система короткострокового прогнозування добового електроспоживання. Проєкт реалізує повний цикл від аналізу даних до впровадження на рівні C99.</p>
-        <a href="documentation.html" style="color:var(--secondary); text-decoration:none; font-weight:600; display:block; margin-top:15px;">
+        <a href="documentation.html" style="color:var(--secondary); text-decoration:none; font-weight:600; display:inline-block; margin-top:15px;">
             <span class="lang-en">View Full Documentation →</span>
             <span class="lang-ua">Переглянути документацію →</span>
         </a>
@@ -105,22 +90,11 @@
 
 <script>
     function toggleLanguage() {
-        const ens = document.querySelectorAll('.lang-en');
-        const uas = document.querySelectorAll('.lang-ua');
-        const isEn = (ens[0].style.display !== 'none');
-        
-        ens.forEach(el => el.style.display = isEn ? 'none' : 'inline-block');
-        uas.forEach(el => el.style.display = isEn ? 'inline-block' : 'none');
-        localStorage.setItem('pref-lang', isEn ? 'ua' : 'en');
+        document.getElementById('page-body').classList.toggle('ua-active');
+        localStorage.setItem('pref-lang', document.getElementById('page-body').classList.contains('ua-active') ? 'ua' : 'en');
     }
-
     window.onload = () => {
-        if(localStorage.getItem('pref-lang') === 'ua') {
-            const ens = document.querySelectorAll('.lang-en');
-            const uas = document.querySelectorAll('.lang-ua');
-            ens.forEach(el => el.style.display = 'none');
-            uas.forEach(el => el.style.display = 'inline-block');
-        }
+        if(localStorage.getItem('pref-lang') === 'ua') document.getElementById('page-body').classList.add('ua-active');
     }
 </script>
 </body>

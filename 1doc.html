@@ -1,158 +1,88 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Прогнозування енергоспоживання — ANN Project</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Documentation | Energy Forecast</title>
     <style>
-        :root {
-            --primary: #0f172a;
-            --secondary: #3b82f6;
-            --accent: #f59e0b;
-            --text-main: #1e293b;
-            --text-light: #64748b;
-            --bg-light: #f8fafc;
-        }
-        * { box-sizing: border-box; }
-        body {
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            line-height: 1.6;
-            color: var(--text-main);
-            background-color: var(--bg-light);
-        }
-        .hero {
-            background: linear-gradient(135deg, var(--primary) 0%, #1e293b 100%);
-            color: white;
-            padding: 100px 20px;
-            text-align: center;
-        }
-        .hero h1 { font-size: 3rem; margin-bottom: 20px; letter-spacing: -1px; }
-        .hero p { font-size: 1.25rem; max-width: 800px; margin: 0 auto 30px; color: #cbd5e1; }
+        :root { --primary: #1e293b; --accent: #3b82f6; }
+        body { font-family: 'Inter', system-ui, sans-serif; line-height: 1.6; padding: 20px; max-width: 900px; margin: auto; background: #f8f9fa; }
+        .card { background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .lang-ua { display: none; }
         
-        .container { max-width: 1100px; margin: -50px auto 50px; padding: 0 20px; }
+        header { display: flex; justify-content: space-between; margin-bottom: 30px; align-items: center; }
+        .btn { text-decoration: none; padding: 10px 18px; border-radius: 8px; font-weight: 600; font-size: 0.9rem; transition: 0.2s; }
+        .btn-home { background: #64748b; color: white; }
+        .btn-home:hover { background: #475569; }
+        .btn-lang { background: #f1f5f9; border: 1px solid #e2e8f0; cursor: pointer; }
         
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-bottom: 60px;
-        }
-        .feature-card {
-            background: white;
-            padding: 30px;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease;
-        }
-        .feature-card:hover { transform: translateY(-5px); }
-        .feature-card h3 { color: var(--secondary); margin-top: 0; }
-        
-        .section { background: white; padding: 50px; border-radius: 20px; margin-bottom: 40px; box-shadow: 0 4px 6px rgba(0,0,0,0.03); }
-        .section h2 { border-left: 5px solid var(--secondary); padding-left: 20px; margin-bottom: 30px; }
-
-        .tech-stack { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px; }
-        .tech-tag {
-            background: #eff6ff;
-            color: #1d4ed8;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        .stats { display: flex; justify-content: space-around; text-align: center; margin: 40px 0; }
-        .stat-item b { font-size: 2.5rem; color: var(--primary); display: block; }
-        .stat-item span { color: var(--text-light); }
-
-        .btn {
-            display: inline-block;
-            background: var(--secondary);
-            color: white;
-            padding: 15px 35px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: opacity 0.3s;
-        }
-        .btn:hover { opacity: 0.9; }
-        
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2rem; }
-            .stats { flex-direction: column; gap: 20px; }
-        }
+        h2 { border-left: 5px solid var(--accent); padding-left: 15px; color: var(--primary); margin-top: 30px; }
+        .formula { background: #0f172a; color: white; padding: 20px; border-radius: 10px; text-align: center; font-family: monospace; font-size: 1.1rem; margin: 20px 0; }
+        ul { padding-left: 20px; }
     </style>
 </head>
 <body>
 
-<header class="hero">
-    <h1>Прогнозування енергоспоживання</h1>
-    <p>Інтелектуальна система на базі штучних нейронних мереж для точного планування енергоресурсів та оптимізації витрат.</p>
-    <a href="#details" class="btn">Докладно про проєкт</a>
-</header>
+<div class="card">
+    <header>
+        <a href="index.html" class="btn btn-home">
+            <span class="lang-en">← Back to Home</span>
+            <span class="lang-ua">← На головну</span>
+        </a>
+        <button class="btn btn-lang" onclick="toggleLanguage()">EN / UA</button>
+    </header>
 
-<div class="container" id="details">
-    <div class="features">
-        <div class="feature-card">
-            <h3>Навчальна еволюція</h3>
-            <p>Поступовий перехід від прототипування в Python/PyTorch до промислової реалізації на C99/FANN.</p>
-        </div>
-        <div class="feature-card">
-            <h3>Метео-залежність</h3>
-            <p>Врахування прогнозу погоди на наступну добу забезпечує високу точність при температурних коливаннях.</p>
-        </div>
-        <div class="feature-card">
-            <h3>Вбудовані системи</h3>
-            <p>Повна сумісність форматів даних для роботи на мікрокомп'ютерах з обмеженими ресурсами.</p>
-        </div>
-    </div>
+    <h1 class="lang-en">Technical Documentation: Energy Forecast (ANN)</h1>
+    <h1 class="lang-ua">Технічна документація: Енергопрогноз (ANN)</h1>
 
-    <section class="section">
-        <h2>Мета та актуальність</h2>
-        <p>Проєкт спрямований на вирішення проблеми точного планування енергоресурсів для уникнення перевантажень мережі. Система здатна «розуміти» складні залежності між зовнішніми чинниками, такими як температура, хмарність, опади, та обсягами споживання.</p>
+    <section>
+        <h2 class="lang-en">Abstract</h2>
+        <h2 class="lang-ua">Анотація</h2>
+        [cite_start]<p class="lang-en">In this project, a comprehensive system for short-term forecasting of daily electricity consumption (24 hours) based on historical data for the last 30 days and weather forecast was developed.</p>
+        [cite_start]<p class="lang-ua">У даному проєкті розроблено комплексну систему для короткострокового прогнозування добового електроспоживання (24 години) на основі історичних даних за останні 30 днів та прогнозу погоди.</p>
+    </section>
+
+    <section>
+        <h2 class="lang-en">System Logic</h2>
+        <h2 class="lang-ua">Логіка системи</h2>
+        [cite_start]<p class="lang-en">The model uses a combined approach for forecasting: history (30 days) and a future factor (weather forecast for the 31st day).</p>
+        [cite_start]<p class="lang-ua">Модель використовує комбінований підхід для прогнозування: історія (30 днів) та майбутній фактор (прогноз погоди на 31-й день).</p>
         
-        <div class="stats">
-            <div class="stat-item"><b>937</b><span>Параметрів входу</span></div>
-            <div class="stat-item"><b>30 днів</b><span>Глибина історії</span></div>
-            <div class="stat-item"><b>24 год</b><span>Горизонт прогнозу</span></div>
+        <div class="formula">
+            <span class="lang-en">Input: 30 days × (7 weather + 24h load) + 7 forecast = 937</span>
+            <span class="lang-ua">Вхід: 30 днів × (7 погода + 24г навантаження) + 7 прогноз = 937</span>
         </div>
     </section>
 
-    
-
-    <section class="section">
-        <h2>Архітектурне рішення</h2>
-        <p>В основі системи лежить повнозв'язна нейронна мережа <b>EnergyANN</b>.</p>
+    <section>
+        <h2 class="lang-en">Technologies</h2>
+        <h2 class="lang-ua">Технології</h2>
         <ul>
-            <li><b>Вхідний шар:</b> 937 нейронів, що включають історію за 30 днів та метеопрогноз.</li>
-            <li><b>Приховані шари:</b> Дворівнева структура (512 та 256 нейронів) з активацією ReLU для виявлення нелінійних патернів.</li>
-            <li><b>Вихідний шар:</b> 24 нейрони, що формують добовий профіль навантаження.</li>
+            [cite_start]<li><strong>Python:</strong> Pandas, PyTorch, Scikit-learn.</li>
+            [cite_start]<li><strong>C99:</strong> FANN (Fast Artificial Neural Network).</li>
         </ul>
-        
-        <h3>Технологічний стек</h3>
-        <div class="tech-stack">
-            <span class="tech-tag">Python</span>
-            <span class="tech-tag">PyTorch</span>
-            <span class="tech-tag">Pandas</span>
-            <span class="tech-tag">Scikit-learn</span>
-            <span class="tech-tag">C99</span>
-            <span class="tech-tag">FANN</span>
-        </div>
     </section>
-
-    <section class="section">
-        <h2>Досліди та результати</h2>
-        <p>Експериментально підтверджено, що модель із прогнозом погоди демонструє кращу адаптацію до аномальних змін температури порівняно з базовими сценаріями.</p>
-        <div class="highlight" style="background: #fffbeb; padding: 20px; border-radius: 10px; border-left: 4px solid var(--accent);">
-            <b>Transfer Learning:</b> Використано механізм перенесення ваг для розширення архітектури моделі, що дозволило зберегти накопичені знання при додаванні нових вхідних ознак.
-        </div>
-    </section>
-
-    <footer style="text-align: center; color: var(--text-light); padding-bottom: 20px;">
-        <p>&copy; 2026 Проєкт прогнозування енергоспоживання. Всі права захищені.</p>
-    </footer>
 </div>
 
+<script>
+    function toggleLanguage() {
+        const ens = document.querySelectorAll('.lang-en');
+        const uas = document.querySelectorAll('.lang-ua');
+        const isEn = (ens[0].style.display !== 'none');
+        
+        ens.forEach(el => el.style.display = isEn ? 'none' : 'block');
+        uas.forEach(el => el.style.display = isEn ? 'block' : 'none');
+        localStorage.setItem('pref-lang', isEn ? 'ua' : 'en');
+    }
+
+    window.onload = () => {
+        if(localStorage.getItem('pref-lang') === 'ua') {
+            const ens = document.querySelectorAll('.lang-en');
+            const uas = document.querySelectorAll('.lang-ua');
+            ens.forEach(el => el.style.display = 'none');
+            uas.forEach(el => el.style.display = 'block');
+        }
+    }
+</script>
 </body>
 </html>

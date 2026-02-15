@@ -11,10 +11,10 @@
         
         /* Логіка мов */
         .lang-ua { display: none; }
-        body.ua-active .lang-ua { display: initial; }
+        body.ua-active .lang-ua { display: block; } /* Змінено на block для коректних відступів */
         body.ua-active .lang-en { display: none; }
         body.ua-active h1.lang-ua, body.ua-active h2.lang-ua, body.ua-active p.lang-ua { display: block; }
-
+    
         header { display: flex; justify-content: space-between; margin-bottom: 30px; align-items: center; }
         .btn { text-decoration: none; padding: 10px 18px; border-radius: 8px; font-weight: 600; font-size: 0.9rem; transition: 0.2s; }
         .btn-home { background: #64748b; color: white; }
@@ -22,6 +22,14 @@
         
         h2 { border-left: 5px solid var(--accent); padding-left: 15px; color: var(--primary); margin-top: 35px; }
         .formula { background: #0f172a; color: white; padding: 20px; border-radius: 10px; text-align: center; font-family: monospace; margin: 20px 0; }
+    
+        /* СТИЛІ ГАЛЕРЕЇ РЕЗУЛЬТАТІВ */
+        .results-gallery { display: flex; align-items: center; justify-content: center; gap: 15px; margin: 30px 0; }
+        .display-container { flex-grow: 1; background: white; padding: 15px; border: 1px solid #e2e8f0; border-radius: 12px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
+        .image-wrapper img { width: 100%; height: auto; border-radius: 6px; border: 1px solid #f1f5f9; }
+        .caption-wrapper { margin-top: 15px; min-height: 45px; font-size: 0.95rem; color: #475569; font-style: italic; }
+        .nav-btn { background: var(--primary); color: white; border: none; width: 42px; height: 42px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; transition: 0.2s; flex-shrink: 0; }
+        .nav-btn:hover { background: var(--accent); transform: scale(1.05); }
     </style>
 </head>
 <body id="page-body">
@@ -53,24 +61,24 @@
         </div>
     </section>
 
-    <section>
+    <section id="results">
         <h2 class="lang-en">Results</h2><h2 class="lang-ua">Результати</h2>
         <p class="lang-en">Blue indicates actual consumption, and Red indicates forecast consumption (The numbers are normalized, so they are smaller than real ones).</p>
         <p class="lang-ua">Синім позначено реальне споживання, а Червоним прогноз споживання (Числа нормалізованні тому менші за реалні).</p>
-        <div class="results-container">
-        <div class="image-viewer">
-            <button class="nav-btn prev" onclick="changeImage(-1)">❮</button>
-            
-            <div class="display-area">
-                <img id="forecast-img" src="1Plot_Forecast.png" alt="Energy Forecast Result">
-                <div class="image-caption">
-                    <p id="caption-text-en" class="lang-en">Graph 1.</p>
-                    <p id="caption-text-ua" class="lang-ua">Графік 1.</p>
-                </div>
-            </div>
+        <div class="results-gallery">
+        <button class="nav-btn" onclick="changeImage(-1)">❮</button>
 
-            <button class="nav-btn next" onclick="changeImage(1)">❯</button>
+        <div class="display-container">
+            <div class="image-wrapper">
+                <img id="forecast-img" src="" alt="Forecast Plot">
+            </div>
+            <div class="caption-wrapper">
+                <p id="caption-ua" class="lang-ua"></p>
+                <p id="caption-en" class="lang-en"></p>
+            </div>
         </div>
+
+        <button class="nav-btn" onclick="changeImage(1)">❯</button>
     </div>
     </section>
 
@@ -82,12 +90,52 @@
 </div>
 
 <script>
+    // Дані для галереї
+    const resultsData = [
+        {
+            src: 'items/1Plot_Forecast.png', 
+            ua: 'Графік 1: Середня помилка: 0.02 МВт·год.', 
+            en: 'Graph 1: Average failure: 0.02 MWh.'
+        },
+        {
+            src: 'items/2Plot_Forecast.png', 
+            ua: 'Графік 1: Середня помилка: 0.02 МВт·год.', 
+            en: 'Graph 1: Average failure: 0.02 MWh.'
+        }
+    ];
+
+    let currentIndex = 0;
+
+    function updateGallery() {
+        const item = resultsData[currentIndex];
+        const imgElement = document.getElementById('forecast-img');
+        if(imgElement) imgElement.src = item.src;
+        
+        const uaCap = document.getElementById('caption-ua');
+        const enCap = document.getElementById('caption-en');
+        if(uaCap) uaCap.innerText = item.ua;
+        if(enCap) enCap.innerText = item.en;
+    }
+
+    function changeImage(direction) {
+        currentIndex += direction;
+        if (currentIndex >= resultsData.length) currentIndex = 0;
+        if (currentIndex < 0) currentIndex = resultsData.length - 1;
+        updateGallery();
+    }
+
     function toggleLanguage() {
         document.getElementById('page-body').classList.toggle('ua-active');
         localStorage.setItem('pref-lang', document.getElementById('page-body').classList.contains('ua-active') ? 'ua' : 'en');
     }
+
     window.onload = () => {
-        if(localStorage.getItem('pref-lang') === 'ua') document.getElementById('page-body').classList.add('ua-active');
+        // Завантаження мови
+        if(localStorage.getItem('pref-lang') === 'ua') {
+            document.getElementById('page-body').classList.add('ua-active');
+        }
+        // Ініціалізація галереї
+        updateGallery();
     }
 </script>
 </body>

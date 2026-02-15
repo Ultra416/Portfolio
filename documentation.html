@@ -54,6 +54,27 @@
     </section>
 
     <section>
+        <h2 class="lang-en">Results</h2><h2 class="lang-ua">Результати</h2>
+        <p class="lang-en">Blue indicates actual consumption, and Red indicates forecast consumption (The numbers are normalized, so they are smaller than real ones).</p>
+        <p class="lang-ua">Синім позначено реальне споживання, а Червоним прогноз споживання (Числа нормалізованні тому менші за реалні).</p>
+        <div class="results-container">
+        <div class="image-viewer">
+            <button class="nav-btn prev" onclick="changeImage(-1)">❮</button>
+            
+            <div class="display-area">
+                <img id="forecast-img" src="image1.png" alt="Energy Forecast Result">
+                <div class="image-caption">
+                    <p id="caption-text-en" class="lang-en">Graph 1: Comparison of predicted and actual energy consumption.</p>
+                    <p id="caption-text-ua" class="lang-ua">Графік 1: Порівняння прогнозованого та реального енергоспоживання.</p>
+                </div>
+            </div>
+
+            <button class="nav-btn next" onclick="changeImage(1)">❯</button>
+        </div>
+    </div>
+    </section>
+
+    <section>
         <h2 class="lang-en">Technologies</h2><h2 class="lang-ua">Технології</h2>
         <p class="lang-en">The project uses Python (PyTorch) for training and C99 for the deployment stage.</p>
         <p class="lang-ua">Проєкт використовує Python (PyTorch) для навчання та C99 для етапу впровадження.</p>

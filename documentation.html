@@ -45,11 +45,11 @@
 
     <section>
         <h2 class="lang-en">Model Logic</h2><h2 class="lang-ua">Логіка моделі</h2>
-        <p class="lang-en">The model predicts 24 hours of load by combining historical data with tomorrow's weather forecast.</p>
-        <p class="lang-ua">Модель прогнозує 24 години навантаження, поєднуючи історичні дані з прогнозом погоди на завтра.</p>
+        <p class="lang-en">The model predicts 24 hours of load by combining data with number of days(30), weather parameters (7) and hours(24).</p>
+        <p class="lang-ua">Модель прогнозує 24 години навантаження, поєднуючи дані кількості днів(30), параметрів погоди і т.д.(7) та годин(24).</p>
         <div class="formula">
-            <span class="lang-en">Input Vector: 937 parameters</span>
-            <span class="lang-ua">Вектор входу: 937 параметрів</span>
+            <span class="lang-en">Input Vector: 30 * 31"24 + 7" = 930 + 7"for next day" = 937 parameters</span>
+            <span class="lang-ua">Вектор входу: 30 * 31"24 + 7" = 930 + 7"для наступного дня" = 937 параметрів</span>
         </div>
     </section>
 

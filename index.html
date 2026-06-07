@@ -28,7 +28,7 @@
         nav { display: flex; align-items: center; gap: 20px; }
         nav a { text-decoration: none; color: #64748b; font-weight: 500; }
         
-        /* --- СТАБІЛЬНЕ ВИПАДАЮЧЕ МЕНЮ ІЗ ЗАТРИМКОЮ --- */
+        /* --- СТАБІЛЬНЕ ВИПАДАЮЧЕ МЕНЮ БЕЗ ПРОГАЛИН --- */
         .dropdown {
             position: relative;
             display: inline-block;
@@ -42,24 +42,23 @@
             display: inline-block;
         }
         
-        /* Оновлений контейнер меню */
+        /* Контейнер меню — тепер притиснутий впритул (0px від кнопки) */
         .dropdown-content {
             position: absolute;
             right: 0;
-            top: 100%;
-            padding-top: 12px;
+            top: 100%;       /* Чітко під кнопкою */
+            padding-top: 0;  /* Повністю прибираємо прогалину */
             z-index: 1010;
-
-            /* Ефект затримки ховається через opacity та visibility */
+        
             opacity: 0;
             visibility: hidden;
             
-            /* Налаштування анімації: зникає за 0.2с, але ТІЛЬКИ ПІСЛЯ 1 секунди затримки */
-            transition: opacity 0.2s ease, visibility 0.2s ease;
+            /* Затримка зникнення на 1 секунду */
+            transition: opacity 0.15s ease, visibility 0.15s ease;
             transition-delay: 1s; 
         }
-
-        /* Сама плашка з посиланнями */
+        
+        /* Сама плашка з посиланнями (додаємо легкий відступ зверху всередині плашки, якщо треба візуально) */
         .dropdown-inner {
             background-color: white;
             min-width: 190px;
@@ -67,8 +66,19 @@
             border-radius: 8px;
             overflow: hidden;
             border: 1px solid #e2e8f0;
+            margin-top: 2px; /* Мінімальний технічний зазор, який перекривається зоною ховера */
         }
-
+        
+        /* Робимо так, щоб invisible-зона dropdown-content перекривала будь-які мікро-щілини */
+        .dropdown-content::before {
+            content: '';
+            position: absolute;
+            top: -10px;      /* Створює невидимий щит НАД меню, який заходить під кнопку */
+            left: 0;
+            right: 0;
+            height: 10px;
+        }
+        
         .dropdown-inner a {
             color: #1e293b;
             padding: 12px 16px;
@@ -76,22 +86,21 @@
             display: block;
             font-size: 0.95rem;
             font-weight: 500;
-            transition: all 0.2s ease;
+            transition: all 0.15s ease;
         }
-
+        
         .dropdown-inner a:hover {
             background-color: #f1f5f9;
             color: var(--secondary);
             padding-left: 20px;
         }
-
-        /* Коли мишка НАВЕДЕНА: меню з'являється моментально (без затримок) */
+        
+        /* Моментальна поява при наведенні */
         .dropdown:hover .dropdown-content {
             opacity: 1;
             visibility: visible;
             transition-delay: 0s; 
         }
-        /* ---------------------------------- */
 
         .lang-switcher { background: #f1f5f9; border: 1px solid #e2e8f0; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: 600; }
 

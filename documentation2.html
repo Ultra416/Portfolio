@@ -3,72 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Documentation 2 | Mod _5 Architecture</title>
+    <title>Documentation 2 | Predictive Maintenance System</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root { --primary: #0f172a; --secondary: #3b82f6; --bg: #f1f5f9; --text: #1e293b; }
         * { box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; margin: 0; background-color: var(--bg); color: var(--text); line-height: 1.6; }
+        
         .lang-ua { display: none; }
         body.ua-active .lang-ua { display: initial; }
         body.ua-active .lang-en { display: none; }
-        body.ua-active h1.lang-ua, body.ua-active p.lang-ua, body.ua-active h2.lang-ua, body.ua-active li.lang-ua, body.ua-active div.lang-ua { display: block; }
-        h1.lang-en, p.lang-en, h2.lang-en, li.lang-en, div.lang-en { display: block; }
+        body.ua-active h1.lang-ua, body.ua-active p.lang-ua, body.ua-active h2.lang-ua, body.ua-active li.lang-ua, body.ua-active div.lang-ua, body.ua-active strong.lang-ua { display: block; }
+        h1.lang-en, p.lang-en, h2.lang-en, li.lang-en, div.lang-en, strong.lang-en { display: block; }
+
         header { background: white; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
         .back-btn { text-decoration: none; color: #64748b; font-weight: 500; }
         .lang-switcher { background: #f1f5f9; border: 1px solid #e2e8f0; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: 600; }
-        .container { max-width: 900px; margin: 120px auto 60px; padding: 0 20px; }
+        .container { max-width: 950px; margin: 120px auto 60px; padding: 0 20px; }
+        
         .doc-hero { background: #0f172a; color: white; padding: 40px; border-radius: 20px; margin-bottom: 40px; }
-        .doc-hero h1 { margin: 0 0 15px 0; font-size: 2.2rem; }
-        .doc-hero p { color: #94a3b8; margin: 0; }
+        .doc-hero h1 { margin: 0 0 15px 0; font-size: 2.2rem; letter-spacing: -0.5px; }
+        .doc-hero p { color: #94a3b8; margin: 0; font-size: 1.1rem; }
+
         .content-section { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 30px; }
-        .content-section h2 { margin-top: 0; font-size: 1.5rem; color: var(--primary); border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; }
-        .grid-plots { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
+        .content-section h2 { margin-top: 0; font-size: 1.6rem; color: var(--primary); border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; margin-bottom: 20px; }
+        .content-section h3 { font-size: 1.15rem; color: #334155; margin-top: 25px; margin-bottom: 10px; }
+        
+        .grid-plots { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 25px; }
         @media(max-width: 768px) { .grid-plots { grid-template-columns: 1fr; } }
         .plot-card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 15px; text-align: center; }
         .plot-card img { max-width: 100%; height: auto; border-radius: 8px; }
-        .badge { background: #dcfce7; color: #166534; padding: 4px 8px; border-radius: 6px; font-weight: 600; font-size: 0.85rem; }
+        
+        .feature-tag { display: inline-block; background: #f1f5f9; padding: 2px 8px; border-radius: 4px; font-family: monospace; font-size: 0.85rem; color: #0284c7; font-weight: 600; }
+        .highlight-box { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 20px; border-radius: 8px; margin: 20px 0; }
     </style>
 </head>
 <body id="page-body">
 
 <header>
-    <a href="index.html" class="back-btn">← <span class="lang-en">Back</span><span class="lang-ua">Назад</span></a>
+    <a href="index.html" class="back-btn">← <span class="lang-en">Back to Portfolio</span><span class="lang-ua">Назад до портфоліо</span></a>
     <button class="lang-switcher" onclick="toggleLanguage()">EN / UA</button>
 </header>
 
 <div class="container">
     <section class="doc-hero">
-        <h1 class="lang-en">Model Modification Variant: "_5"</h1>
-        <h1 class="lang-ua">Модифікація моделі: Варіант "_5"</h1>
-        <p class="lang-en">Deep analysis of the highly regularized architecture designed to prevent overfitting in time-series predictive maintenance loops.</p>
-        <p class="lang-ua">Глибокий аналіз високорегуляризованої архітектури, розробленої для запобігання перенавчанню у циклах PdM.</p>
+        <h1 class="lang-en">Predictive Maintenance (PdM) Intelligent Framework</h1>
+        <h1 class="lang-ua">Інтелектуальна система прогностичного обслуговування (PdM)</h1>
+        <p class="lang-en">Advanced machine learning approach for early equipment failure detection using neural networks and dynamic feature synthesis.</p>
+        <p class="lang-ua">Сучасний підхід на базі машинного навчання для раннього виявлення відмов обладнання за допомогою нейромереж та динамічного синтезу ознак.</p>
     </section>
 
     <section class="content-section">
-        <h2 class="lang-en">Experimental Performance Charts</h2>
-        <h2 class="lang-ua">Графіки результатів експерименту</h2>
-        
+        <h2 class="lang-en">System Architecture & Feature Engineering</h2>
+        <h2 class="lang-ua">Архітектура системи та інженерія ознак</h2>
+        <p class="lang-en">The core concept of Predictive Maintenance (PdM) is to transition from reactive maintenance (fixing things after they break) to proactive scheduling based on continuous state monitoring. This pipeline achieves this by building advanced feature groups:</p>
+        <p class="lang-ua">Головна концепція прогностичного обслуговування (PdM) полягає у переході від реактивного ремонту (виправлення поломок постфактум) до проактивного планування на основі постійного моніторингу стану. Цей комплекс реалізує це через побудову розширених груп ознак:</p>
+
+        <h3>1. <span class="lang-en">Temporal Context Synthesis</span><span class="lang-ua">Синтез часового контексту</span></h3>
+        <p class="lang-en">Extracts cycles, hourly shifts, weekends, and calendar milestones (<span class="feature-tag">time_step</span>, <span class="feature-tag">shift_id</span>, <span class="feature-tag">is_weekend</span>) to learn operating patterns affected by plant schedules.</p>
+        <p class="lang-ua">Виділяє цикли, погодинні зміни, вихідні дні та календарні віхи (<span class="feature-tag">time_step</span>, <span class="feature-tag">shift_id</span>, <span class="feature-tag">is_weekend</span>) для виявлення закономірностей, на які впливає графік роботи підприємства.</p>
+
+        <h3>2. <span class="lang-en">Synthetic Environment Modeling</span><span class="lang-ua">Моделювання параметрів довкілля</span></h3>
+        <p class="lang-en">Simulates outdoor thermal cycles and shifting humidity trends via sine-wave mathematical foundations to trace ambient stress correlations.</p>
+        <p class="lang-ua">Симулює добові термічні цикли та коливання вологості за допомогою тригонометричних математичних моделей для відстеження впливу зовнішнього стресу на залізо.</p>
+
+        <h3>3. <span class="lang-en">Operating Load Metrics</span><span class="lang-ua">Метрики робочого навантаження</span></h3>
+        <p class="lang-en">Integrates internal telemetry (Torque, Rotational speed, Tool wear) into a unified metric: <span class="feature-tag">load_percent</span>. This parameter further derives industrial attributes such as current consumption, voltage fluctuations, active power, and Root Mean Square vibration readings (<span class="feature-tag">vibration_rms</span>).</p>
+        <p class="lang-ua">Інтегрує показники внутрішньої телеметрії (крутний момент, швидкість обертання, знос інструменту) в єдину метрику: <span class="feature-tag">load_percent</span>. Цей параметр далі формує промислові атрибути: споживання струму, коливання напруги, активну потужність та середньоквадратичне значення вібрації (<span class="feature-tag">vibration_rms</span>).</p>
+    </section>
+
+    <section class="content-section">
+        <h2 class="lang-en">Prognostic Horizons & Model Generalization</h2>
+        <h2 class="lang-ua">Прогностичні горизонти та генералізація моделі</h2>
+        <p class="lang-en">The core target is a sliding forecast window looking exactly <strong>24 steps into the future</strong> (<span class="feature-tag">failure_in_next_24_steps</span>). Predicting failures far in advance allows human operators enough time to react and schedule emergency shutdowns smoothly.</p>
+        <p class="lang-ua">Головна ціль навчання — це ковзне вікно прогнозування рівно на <strong>24 кроки вперед</strong> (<span class="feature-tag">failure_in_next_24_steps</span>). Передбачення аварії заздалегідь дає операторам достатньо часу для планового зупину обладнання.</p>
+
+        <div class="highlight-box">
+            <strong class="lang-en">Optimization Strategy Note:</strong>
+            <strong class="lang-ua">Нотатка щодо стратегії оптимізації:</strong>
+            <p class="lang-en">To ensure real-world viability, the baseline network was regularized with structured Dropout (0.5) and an aggressive $10^{-4}$ L2 weight decay penalty. This combination heavily guards the model against overfitting to local noise. While this introduces a slightly broader variance in individual loss outputs (higher instant probability of error), it significantly elevates the network's capacity to recognize global degradation signatures.</p>
+            <p class="lang-ua">Для забезпечення стабільності в реальних умовах, базова мережа була модифікована структурованим Dropout (0.5) та штрафом L2-регуляризації ваг $10^{-4}$. Це поєднання захищає модель від перенавчання на локальних шумах. Хоча це призводить до вищої дисперсії окремих локальних похибок, воно значно підвищує здатність мережі розпізнавати глобальні ознаки зносу.</p>
+        </div>
+
+        <h3><span class="lang-en">Validation Metrics & Field Results</span><span class="lang-ua">Валідаційні метрики та результати експерименту</span></h3>
+        <p class="lang-en">The metrics confirm that the regularized framework significantly outperforms the classical baseline structure:</p>
+        <p class="lang-ua">Метрики підтверджують, що прогностична модель із посиленою регуляризацією значно перевершує класичну базову структуру:</p>
+
         <ul>
-            <li class="lang-en"><strong>Higher General Accuracy:</strong> The regularized approach increased classification capability to <span class="badge">AUC = 0.6829</span>.</li>
-            <li class="lang-ua"><strong>Вища загальна точність:</strong> Регуляризований підхід підвищив класифікаційну здатність моделі до <span class="badge">AUC = 0.6829</span>.</li>
-            <li class="lang-en"><strong>Enhanced Fault Catching:</strong> The model captured <span class="badge">282 true failures</span> (vs 224 baseline), significantly lowering dangerous missed alarms (False Negatives).</li>
-            <li class="lang-ua"><strong>Краще виявлення поломок:</strong> Модель успішно зафіксувала <span class="badge">282 реальні відмови</span> (проти 224 у базової), значно зменшивши кількість пропущених аварій.</li>
+            <li class="lang-en"><strong>ROC-AUC Score:</strong> Increased from 0.6544 to <span class="feature-tag" style="color:#16a34a;">0.6829</span>, validating superior boundary discrimination between safe operations and critical pre-failure states.</li>
+            <li class="lang-ua"><strong>Показник ROC-AUC:</strong> Зріс з 0.6544 до <span class="feature-tag" style="color:#16a34a;">0.6829</span>, що підтверджує значно краще розділення безпечного стану від критичної передвідмовної фази.</li>
+            <li class="lang-en"><strong>True Positive Maxima:</strong> Successfully captured <strong>282 actual machine failures</strong> (compared to only 224 in baseline), minimizing missed catastrophic events.</li>
+            <li class="lang-ua"><strong>Максимум True Positive:</strong> Успішно зафіксовано <strong>282 реальні поломки</strong> (проти лише 224 у базової моделі), що мінімізує критичні пропуски аварійних сигналів.</li>
         </ul>
 
         <div class="grid-plots">
             <div class="plot-card">
-                <img src="items/plots/loss_5.png" alt="Mod 5 Loss Chart">
-                <p style="margin-top:10px; font-weight:600;">Smooth Optimization Loss</p>
+                <img src="items/plots/loss_5.png" alt="Optimization Loss Graph">
+                <p style="margin-top:10px; font-weight:600;" class="lang-en">Stable Optimization Loss</p>
+                <p style="margin-top:10px; font-weight:600;" class="lang-ua">Стабільна функція втрат</p>
             </div>
             <div class="plot-card">
-                <img src="items/plots/roc_curve_5.png" alt="Mod 5 ROC Curve">
-                <p style="margin-top:10px; font-weight:600;">ROC Curve (AUC = 0.6829)</p>
+                <img src="items/plots/roc_curve_5.png" alt="ROC AUC Framework Graph">
+                <p style="margin-top:10px; font-weight:600;" class="lang-en">ROC Curve (AUC = 0.6829)</p>
+                <p style="margin-top:10px; font-weight:600;" class="lang-ua">Крива ROC (AUC = 0.6829)</p>
             </div>
         </div>
         <div class="plot-card" style="margin-top: 20px;">
-            <img src="items/plots/confusion_matrix_5.png" alt="Mod 5 Confusion Matrix" style="max-height: 350px;">
-            <p style="margin-top:10px; font-weight:600;">Confusion Matrix (True Failure Detection: 282)</p>
+            <img src="items/plots/confusion_matrix_5.png" alt="PdM Confusion Matrix" style="max-height: 350px;">
+            <p style="margin-top:10px; font-weight:600;" class="lang-en">Confusion Matrix (Enhanced Failure Catch: 282 units)</p>
+            <p style="margin-top:10px; font-weight:600;" class="lang-ua">Матриця помилок (Покращене виявлення: 282 верстати)</p>
         </div>
     </section>
 </div>

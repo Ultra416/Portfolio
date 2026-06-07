@@ -28,7 +28,7 @@
         nav { display: flex; align-items: center; gap: 20px; }
         nav a { text-decoration: none; color: #64748b; font-weight: 500; }
         
-        /* --- СТАБІЛЬНЕ ВИПАДАЮЧЕ МЕНЮ --- */
+        /* --- СТАБІЛЬНЕ ВИПАДАЮЧЕ МЕНЮ ІЗ ЗАТРИМКОЮ --- */
         .dropdown {
             position: relative;
             display: inline-block;
@@ -42,14 +42,21 @@
             display: inline-block;
         }
         
-        /* Контейнер меню з невидимим мостом для утримання фокусу миші */
+        /* Оновлений контейнер меню */
         .dropdown-content {
-            display: none;
             position: absolute;
             right: 0;
             top: 100%;
-            padding-top: 12px; /* Невидима зона, яка з'єднує кнопку з меню */
+            padding-top: 12px;
             z-index: 1010;
+
+            /* Ефект затримки ховається через opacity та visibility */
+            opacity: 0;
+            visibility: hidden;
+            
+            /* Налаштування анімації: зникає за 0.2с, але ТІЛЬКИ ПІСЛЯ 1 секунди затримки */
+            transition: opacity 0.2s ease, visibility 0.2s ease;
+            transition-delay: 1s; 
         }
 
         /* Сама плашка з посиланнями */
@@ -72,16 +79,17 @@
             transition: all 0.2s ease;
         }
 
-        /* Ефект наведення на посилання всередині меню */
         .dropdown-inner a:hover {
             background-color: #f1f5f9;
             color: var(--secondary);
-            padding-left: 20px; /* Легкий ефект зсуву при наведенні */
+            padding-left: 20px;
         }
 
-        /* Показувати меню, коли мишка знаходиться над кнопкою або над самим меню */
+        /* Коли мишка НАВЕДЕНА: меню з'являється моментально (без затримок) */
         .dropdown:hover .dropdown-content {
-            display: block;
+            opacity: 1;
+            visibility: visible;
+            transition-delay: 0s; 
         }
         /* ---------------------------------- */
 
@@ -113,17 +121,13 @@
             </a>
             <div class="dropdown-content">
                 <div class="dropdown-inner">
-                    <a href="doc1.html">
+                    <a href="documentation.html">
                         <span class="lang-en">📊 Documentation 1</span>
                         <span class="lang-ua">📊 Документація 1</span>
                     </a>
                     <a href="doc2.html">
                         <span class="lang-en">⚙️ Documentation 2</span>
                         <span class="lang-ua">⚙️ Документація 2</span>
-                    </a>
-                    <a href="doc3.html">
-                        <span class="lang-en">🚀 Documentation 3</span>
-                        <span class="lang-ua">🚀 Документація 3</span>
                     </a>
                 </div>
             </div>

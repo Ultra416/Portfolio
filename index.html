@@ -28,7 +28,7 @@
         nav { display: flex; align-items: center; gap: 20px; }
         nav a { text-decoration: none; color: #64748b; font-weight: 500; }
         
-        /* --- СТИЛІ ДЛЯ ВИПАДАЮЧОГО МЕНЮ --- */
+        /* --- СТАБІЛЬНЕ ВИПАДАЮЧЕ МЕНЮ --- */
         .dropdown {
             position: relative;
             display: inline-block;
@@ -41,32 +41,45 @@
             cursor: pointer;
             display: inline-block;
         }
+        
+        /* Контейнер меню з невидимим мостом для утримання фокусу миші */
         .dropdown-content {
             display: none;
             position: absolute;
             right: 0;
             top: 100%;
-            background-color: white;
-            min-width: 180px;
-            box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
-            border-radius: 8px;
-            margin-top: 8px;
-            overflow: hidden;
+            padding-top: 12px; /* Невидима зона, яка з'єднує кнопку з меню */
             z-index: 1010;
         }
-        .dropdown-content a {
+
+        /* Сама плашка з посиланнями */
+        .dropdown-inner {
+            background-color: white;
+            min-width: 190px;
+            box-shadow: 0px 8px 24px rgba(15, 23, 42, 0.12);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+
+        .dropdown-inner a {
             color: #1e293b;
             padding: 12px 16px;
             text-decoration: none;
             display: block;
             font-size: 0.95rem;
-            transition: background 0.2s;
+            font-weight: 500;
+            transition: all 0.2s ease;
         }
-        .dropdown-content a:hover {
+
+        /* Ефект наведення на посилання всередині меню */
+        .dropdown-inner a:hover {
             background-color: #f1f5f9;
             color: var(--secondary);
+            padding-left: 20px; /* Легкий ефект зсуву при наведенні */
         }
-        /* Показувати меню при наведенні мишки */
+
+        /* Показувати меню, коли мишка знаходиться над кнопкою або над самим меню */
         .dropdown:hover .dropdown-content {
             display: block;
         }
@@ -94,23 +107,25 @@
         <a href="#about"><span class="lang-en">About</span><span class="lang-ua">Про мене</span></a>
         
         <div class="dropdown">
-            <a href="#" class="nav-btn">
+            <a href="#" class="nav-btn" onclick="return false;">
                 <span class="lang-en">Documentation</span>
                 <span class="lang-ua">Документація</span>
             </a>
             <div class="dropdown-content">
-                <a href="doc1.html">
-                    <span class="lang-en">Documentation 1</span>
-                    <span class="lang-ua">Документація 1</span>
-                </a>
-                <a href="doc2.html">
-                    <span class="lang-en">Documentation 2</span>
-                    <span class="lang-ua">Документація 2</span>
-                </a>
-                <a href="doc3.html">
-                    <span class="lang-en">Documentation 3</span>
-                    <span class="lang-ua">Документація 3</span>
-                </a>
+                <div class="dropdown-inner">
+                    <a href="doc1.html">
+                        <span class="lang-en">📊 Documentation 1</span>
+                        <span class="lang-ua">📊 Документація 1</span>
+                    </a>
+                    <a href="doc2.html">
+                        <span class="lang-en">⚙️ Documentation 2</span>
+                        <span class="lang-ua">⚙️ Документація 2</span>
+                    </a>
+                    <a href="doc3.html">
+                        <span class="lang-en">🚀 Documentation 3</span>
+                        <span class="lang-ua">🚀 Документація 3</span>
+                    </a>
+                </div>
             </div>
         </div>
         
@@ -132,7 +147,7 @@
             <h2 class="lang-en">About Me</h2>
             <h2 class="lang-ua">Про мене</h2>
             <p class="lang-en">I am a developer focusing on the intersection of high-level Machine Learning and high-performance Python solutions. My approach is based on creating systems that are not only accurate but also efficient in real-world conditions.</p>
-            <p class="lang-ua">Я розробник, який фокусується на поєднанні високорівневого машинного навчання та продуктивних рішень на Python. Мій підхід базується на створені систем, які є не лише точними, а й ефективними у реальних умовах.</p>
+            <p class="lang-ua">Я розробник, який фокусується на поєднанні високорівневого машинного навчання та продуктивних рішень на Python. Мій підхід базується на створенні систем, які є не лише точними, а й ефективними у реальних умовах.</p>
             <div style="margin-top:15px; display:flex; gap:10px;">
                 <span style="background:#f1f5f9; padding:5px 12px; border-radius:6px; font-weight:600;">Python</span>
                 <span style="background:#f1f5f9; padding:5px 12px; border-radius:6px; font-weight:600;">PyTorch</span>

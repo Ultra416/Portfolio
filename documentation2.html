@@ -3,111 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Documentation 2 | Damage Propagation Modeling</title>
+    <title>Documentation 2 | Mod _5 Architecture</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        :root { 
-            --primary: #0f172a; 
-            --secondary: #3b82f6; 
-            --bg: #f1f5f9; 
-            --text: #1e293b;
-        }
+        :root { --primary: #0f172a; --secondary: #3b82f6; --bg: #f1f5f9; --text: #1e293b; }
         * { box-sizing: border-box; }
-        body { 
-            font-family: 'Inter', sans-serif; 
-            margin: 0; 
-            background-color: var(--bg); 
-            color: var(--text); 
-            line-height: 1.6;
-        }
-        
-        /* Логіка мов */
+        body { font-family: 'Inter', sans-serif; margin: 0; background-color: var(--bg); color: var(--text); line-height: 1.6; }
         .lang-ua { display: none; }
         body.ua-active .lang-ua { display: initial; }
         body.ua-active .lang-en { display: none; }
-        
-        body.ua-active h1.lang-ua, body.ua-active p.lang-ua, body.ua-active h2.lang-ua, body.ua-active li.lang-ua { display: block; }
-        h1.lang-en, p.lang-en, h2.lang-en, li.lang-en { display: block; }
-
-        header {
-            background: white; padding: 15px 5%;
-            display: flex; justify-content: space-between; align-items: center;
-            position: fixed; width: 100%; top: 0; z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-        .logo { font-weight: 700; text-decoration: none; color: var(--primary); }
-        .back-btn { text-decoration: none; color: #64748b; font-weight: 500; display: flex; align-items: center; gap: 5px; }
-        .back-btn:hover { color: var(--secondary); }
+        body.ua-active h1.lang-ua, body.ua-active p.lang-ua, body.ua-active h2.lang-ua, body.ua-active li.lang-ua, body.ua-active div.lang-ua { display: block; }
+        h1.lang-en, p.lang-en, h2.lang-en, li.lang-en, div.lang-en { display: block; }
+        header { background: white; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .back-btn { text-decoration: none; color: #64748b; font-weight: 500; }
         .lang-switcher { background: #f1f5f9; border: 1px solid #e2e8f0; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: 600; }
-
         .container { max-width: 900px; margin: 120px auto 60px; padding: 0 20px; }
-        
-        /* Стиль головної картки (як на головній сторінці) */
-        .doc-hero { 
-            background: #0f172a; 
-            color: white; 
-            padding: 40px; 
-            border-radius: 20px; 
-            margin-bottom: 40px;
-            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
-        }
-        .doc-hero h1 { margin: 0 0 15px 0; font-size: 2.2rem; letter-spacing: -0.5px; }
-        .doc-hero p { color: #94a3b8; margin: 0; font-size: 1.1rem; }
-
-        .content-section { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 30px; }
+        .doc-hero { background: #0f172a; color: white; padding: 40px; border-radius: 20px; margin-bottom: 40px; }
+        .doc-hero h1 { margin: 0 0 15px 0; font-size: 2.2rem; }
+        .doc-hero p { color: #94a3b8; margin: 0; }
+        .content-section { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 30px; }
         .content-section h2 { margin-top: 0; font-size: 1.5rem; color: var(--primary); border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; }
-        
-        ul { padding-left: 20px; }
-        li { margin-bottom: 10px; }
-
-        .code-badge { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-family: monospace; font-weight: 600; color: #ef4444; }
+        .grid-plots { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
+        @media(max-width: 768px) { .grid-plots { grid-template-columns: 1fr; } }
+        .plot-card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 15px; text-align: center; }
+        .plot-card img { max-width: 100%; height: auto; border-radius: 8px; }
+        .badge { background: #dcfce7; color: #166534; padding: 4px 8px; border-radius: 6px; font-weight: 600; font-size: 0.85rem; }
     </style>
 </head>
 <body id="page-body">
 
 <header>
-    <a href="index.html" class="back-btn">
-        ← <span class="lang-en">Back to Portfolio</span><span class="lang-ua">Назад до портфоліо</span>
-    </a>
+    <a href="index.html" class="back-btn">← <span class="lang-en">Back</span><span class="lang-ua">Назад</span></a>
     <button class="lang-switcher" onclick="toggleLanguage()">EN / UA</button>
 </header>
 
 <div class="container">
     <section class="doc-hero">
-        <h1 class="lang-en">Damage Propagation Modeling for Run-to-Failure Simulation</h1>
-        <h1 class="lang-ua">Моделювання поширення пошкоджень для симуляції відмов</h1>
-        <p class="lang-en">Research on prognostic systems, health index tracking, and modular engine degradation frameworks using C-MAPSS.</p>
-        <p class="lang-ua">Дослідження прогностичних систем, відстеження індексу стану (health index) та деградації модулів двигуна за допомогою C-MAPSS.</p>
+        <h1 class="lang-en">Model Modification Variant: "_5"</h1>
+        <h1 class="lang-ua">Модифікація моделі: Варіант "_5"</h1>
+        <p class="lang-en">Deep analysis of the highly regularized architecture designed to prevent overfitting in time-series predictive maintenance loops.</p>
+        <p class="lang-ua">Глибокий аналіз високорегуляризованої архітектури, розробленої для запобігання перенавчанню у циклах PdM.</p>
     </section>
 
     <section class="content-section">
-        <h2 class="lang-en">1. Prognostics & System Health Index</h2>
-        <h2 class="lang-ua">1. Прогностика та індекс стану системи</h2>
-        <p class="lang-en">Prognostics focuses on estimating the Remaining Useful Life (RUL) of complex subsystems in units of time or operational cycles. Tracking degradation allows for optimized maintenance schedules and failure prevention.</p>
-        <p class="lang-ua">Прогностика зосереджена на оцінці залишкового корисного ресурсу (RUL) складних підсистем в одиницях часу або робочих циклах. Відстеження деградації дозволяє оптимізувати графіки обслуговування та запобігати аваріям.</p>
+        <h2 class="lang-en">Experimental Performance Charts</h2>
+        <h2 class="lang-ua">Графіки результатів експерименту</h2>
         
         <ul>
-            <li class="lang-en"><strong>Health Index (H):</strong> Defined dynamically as the minimum of several superimposed operational safety margins (e.g. stall margins, EGT thresholds). Failure is reached when <span class="code-badge">H = 0</span>.</li>
-            <li class="lang-ua"><strong>Індекс стану (H):</strong> Визначається динамічно як мінімум серед кількох суміщених робочих меж безпеки (межі звалювання, пороги EGT). Критерій відмови настає, коли <span class="code-badge">H = 0</span>.</li>
-            <li class="lang-en"><strong>Deterioration:</strong> An exponential rate of change for flow capacity and efficiency loss is applied to simulate progressive faults.</li>
-            <li class="lang-ua"><strong>Погіршення стану:</strong> Експоненціальна швидкість зміни втрати пропускної спроможності потоку та ефективності застосовується для моделювання прогресуючих дефектів.</li>
+            <li class="lang-en"><strong>Higher General Accuracy:</strong> The regularized approach increased classification capability to <span class="badge">AUC = 0.6829</span>.</li>
+            <li class="lang-ua"><strong>Вища загальна точність:</strong> Регуляризований підхід підвищив класифікаційну здатність моделі до <span class="badge">AUC = 0.6829</span>.</li>
+            <li class="lang-en"><strong>Enhanced Fault Catching:</strong> The model captured <span class="badge">282 true failures</span> (vs 224 baseline), significantly lowering dangerous missed alarms (False Negatives).</li>
+            <li class="lang-ua"><strong>Краще виявлення поломок:</strong> Модель успішно зафіксувала <span class="badge">282 реальні відмови</span> (проти 224 у базової), значно зменшивши кількість пропущених аварій.</li>
         </ul>
-    </section>
 
-    <section class="content-section">
-        <h2 class="lang-en">2. Mathematical Degradation Frameworks</h2>
-        <h2 class="lang-ua">2. Математичні підходи до моделювання зносу</h2>
-        <p class="lang-en">To model physics-inspired macroeconomic wear without tracking micro-level crack propagation details, generalized exponential structures are deployed:</p>
-        <p class="lang-ua">Для моделювання макроекономічного зносу на основі фізичних процесів (без детального мікрорівневого відстеження тріщин) розгортаються узагальнені експоненціальні структури:</p>
-        
-        <ul>
-            <li class="lang-en"><strong>Arrhenius Model:</strong> Utilized primarily for degradation mechanisms driven by chemical reactions and diffusion trends.</li>
-            <li class="lang-ua"><strong>Модель Арреніуса:</strong> Використовується переважно для механізмів деградації, зумовлених хімічними реакціями та дифузійними процесами.</li>
-            <li class="lang-en"><strong>Coffin-Manson Model:</strong> Applied to mechanical failure, material fatigue, and deformation caused by thermal cycling.</li>
-            <li class="lang-ua"><strong>Модель Коффіна-Менсона:</strong> Застосовується при механічних пошкодженнях, втомі матеріалів та деформаціях через температурні цикли.</li>
-            <li class="lang-en"><strong>Generalized Wear Equation:</strong> Expressed via the time-varying state equation: <span class="code-badge">h(t) = 1 - d - exp{at^b}</span> to manage noise and random process setpoints.</li>
-            <li class="lang-ua"><strong>Узагальнене рівняння зносу:</strong> Виражається через рівняння стану, що змінюється в часі: <span class="code-badge">h(t) = 1 - d - exp{at^b}</span> для врахування системних шумів та випадкових початкових точок зносу.</li>
-        </ul>
+        <div class="grid-plots">
+            <div class="plot-card">
+                <img src="../plots/loss_5.png" alt="Mod 5 Loss Chart">
+                <p style="margin-top:10px; font-weight:600;">Smooth Optimization Loss</p>
+            </div>
+            <div class="plot-card">
+                <img src="../plots/roc_curve_5.png" alt="Mod 5 ROC Curve">
+                <p style="margin-top:10px; font-weight:600;">ROC Curve (AUC = 0.6829)</p>
+            </div>
+        </div>
+        <div class="plot-card" style="margin-top: 20px;">
+            <img src="../plots/confusion_matrix_5.png" alt="Mod 5 Confusion Matrix" style="max-height: 350px;">
+            <p style="margin-top:10px; font-weight:600;">Confusion Matrix (True Failure Detection: 282)</p>
+        </div>
     </section>
 </div>
 

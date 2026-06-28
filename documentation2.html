@@ -13,8 +13,8 @@
         .lang-ua { display: none; }
         body.ua-active .lang-ua { display: initial; }
         body.ua-active .lang-en { display: none; }
-        body.ua-active h1.lang-ua, body.ua-active p.lang-ua, body.ua-active h2.lang-ua, body.ua-active li.lang-ua, body.ua-active div.lang-ua, body.ua-active strong.lang-ua { display: block; }
-        h1.lang-en, p.lang-en, h2.lang-en, li.lang-en, div.lang-en, strong.lang-en { display: block; }
+        body.ua-active h1.lang-ua, body.ua-active p.lang-ua, body.ua-active h2.lang-ua, body.ua-active li.lang-ua, body.ua-active div.lang-ua, body.ua-active strong.lang-ua, body.ua-active span.lang-ua { display: block; }
+        h1.lang-en, p.lang-en, h2.lang-en, li.lang-en, div.lang-en, strong.lang-en, span.lang-en { display: block; }
 
         header { background: white; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
         .back-btn { text-decoration: none; color: #64748b; font-weight: 500; }
@@ -36,6 +36,12 @@
         
         .feature-tag { display: inline-block; background: #f1f5f9; padding: 2px 8px; border-radius: 4px; font-family: monospace; font-size: 0.85rem; color: #0284c7; font-weight: 600; }
         .highlight-box { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 20px; border-radius: 8px; margin: 20px 0; }
+
+        /* Стилі для секції завантаження файлу */
+        .download-box { text-align: center; background: #f8fafc; border: 2px dashed #e2e8f0; padding: 30px; border-radius: 16px; margin-top: 40px; }
+        .download-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: var(--primary); color: white; text-decoration: none; padding: 12px 28px; border-radius: 8px; font-weight: 600; transition: background 0.2s ease, transform 0.1s ease; margin-top: 15px; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15); }
+        .download-btn:hover { background: #1e293b; transform: translateY(-1px); }
+        .download-btn:active { transform: translateY(0); }
     </style>
 </head>
 <body id="page-body">
@@ -114,6 +120,20 @@
             <p style="margin-top:10px; font-weight:600;" class="lang-ua">Матриця помилок (Покращене виявлення: 282 верстати)</p>
         </div>
     </section>
+
+    <section class="download-box">
+        <h3 style="margin-top: 0;">
+            <span class="lang-en">Project Materials</span>
+            <span class="lang-ua">Матеріали проєкту</span>
+        </h3>
+        <p style="margin: 0; color: #64748b;" class="lang-en">Download the full documentation or notebook dataset for offline research.</p>
+        <p style="margin: 0; color: #64748b;" class="lang-ua">Завантажте повну документацію або датасет проєкту для автономного дослідження.</p>
+        
+        <a href="files/pdm_report.pdf" download class="download-btn">
+            <span class="lang-en">📥 Download PDF Report</span>
+            <span class="lang-ua">📥 Завантажити PDF Звіт</span>
+        </a>
+    </section>
 </div>
 
 <script>
@@ -122,6 +142,7 @@
         localStorage.setItem('pref-lang', document.getElementById('page-body').classList.contains('ua-active') ? 'ua' : 'en');
     }
     window.onload = () => {
+        if(localStorage.getItem('pref-lang') === 'ua') document.getElementById('page-body').classList.add('add-ua-active'); // Виправлено для сумісності з вашим логічним класом
         if(localStorage.getItem('pref-lang') === 'ua') document.getElementById('page-body').classList.add('ua-active');
     }
 </script>
